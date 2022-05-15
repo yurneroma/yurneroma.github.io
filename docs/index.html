@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Site</title>
+    <title>小飞侠的后花园</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
     <meta name="generator" content="Hugo 0.98.0" />
@@ -29,19 +29,19 @@
 
     
     
-      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="My New Hugo Site" />
-      <link href="/index.xml" rel="feed" type="application/rss+xml" title="My New Hugo Site" />
+      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="小飞侠的后花园" />
+      <link href="/index.xml" rel="feed" type="application/rss+xml" title="小飞侠的后花园" />
       
     
     
-    <meta property="og:title" content="My New Hugo Site" />
+    <meta property="og:title" content="小飞侠的后花园" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://example.org/" />
 
-<meta itemprop="name" content="My New Hugo Site">
+<meta itemprop="name" content="小飞侠的后花园">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My New Hugo Site"/>
+<meta name="twitter:title" content="小飞侠的后花园"/>
 <meta name="twitter:description" content=""/>
 
 	
@@ -57,7 +57,7 @@
   <div class="flex-l justify-between items-center center">
     <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
       
-        My New Hugo Site
+        小飞侠的后花园
       
     </a>
     <div class="flex-l items-center">
@@ -75,7 +75,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          My New Hugo Site
+          小飞侠的后花园
         </h1>
         
       </div>
@@ -119,6 +119,32 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/second-post/" class="color-inherit dim link">
+            Second Post
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          redis 分布式锁 方案1 set nx ex 参数 + 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock + redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  
+        </div>
+          <a href="/posts/second-post/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/first-post/" class="color-inherit dim link">
             First Post
             </a>
@@ -146,7 +172,7 @@
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
-    &copy;  My New Hugo Site 2022 
+    &copy;  小飞侠的后花园 2022 
   </a>
     <div>
 <div class="ananke-socials">

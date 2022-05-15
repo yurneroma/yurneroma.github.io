@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>小飞侠的后花园</title>
     <link>http://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on 小飞侠的后花园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 May 2022 20:50:46 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 May 2022 21:44:22 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Second Post</title>
+      <link>http://example.org/posts/second-post/</link>
+      <pubDate>Sun, 15 May 2022 21:44:22 +0800</pubDate>
+      
+      <guid>http://example.org/posts/second-post/</guid>
+      <description>redis 分布式锁 方案1 set nx ex 参数 + 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock + redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&amp;gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  </description>
+    </item>
+    
     <item>
       <title>First Post</title>
       <link>http://example.org/posts/first-post/</link>

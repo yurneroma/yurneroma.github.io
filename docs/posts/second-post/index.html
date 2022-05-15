@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Second Post | 小飞侠的后花园</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  ">
+    <meta name="generator" content="Hugo 0.98.0" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Second Post" />
+<meta property="og:description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/second-post/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-15T21:44:22+08:00" />
+<meta property="article:modified_time" content="2022-05-15T21:44:22+08:00" />
+
+<meta itemprop="name" content="Second Post">
+<meta itemprop="description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  "><meta itemprop="datePublished" content="2022-05-15T21:44:22+08:00" />
+<meta itemprop="dateModified" content="2022-05-15T21:44:22+08:00" />
+<meta itemprop="wordCount" content="52">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Second Post"/>
+<meta name="twitter:description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
+方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
+方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  "/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        小飞侠的后花园
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Second Post</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-05-15T21:44:22+08:00">May 15, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="redis-分布式锁">redis 分布式锁</h1>
+<h3 id="方案1">方案1</h3>
+<p>set nx ex 参数 + 校验唯一随机数值再释放
+存在问题, 锁过期被释放,业务还没执行完的问题
+校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)</p>
+<h3 id="方案2-redisson">方案2 Redisson</h3>
+<p>对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题
+前面方案都是单机版本,  如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁.  这会存在问题.
+image.png</p>
+<h3 id="方案三-redlock--redission">方案三 redLock + redission</h3>
+<ol>
+<li>获取当前时间
+按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过
+如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功
+否则释放锁</li>
+</ol>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+    &copy;  小飞侠的后花园 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
