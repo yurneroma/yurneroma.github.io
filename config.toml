@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://yurneroma.github.io/'
 languageCode = 'en-us'
 title = '小飞侠的后花园'
 theme = "ananke"
