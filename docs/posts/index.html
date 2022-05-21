@@ -37,7 +37,7 @@
     <meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://example.org/posts/" />
+<meta property="og:url" content="http://yurneroma.github.io/posts/" />
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
@@ -94,6 +94,23 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/redis-expire-%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" class="link black dim">
+        Redis Expire 删除策略
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      主动删除.  用户设置了key, 和expire 之后. redis 在后台自动设置一个定时器, 在过期时间来临的时候, 定时器生效, 并删除这个key. 好处是可以精准的删除key. 坏处有很多, 对cpu 不友好. 当有大量的key 需要过期时, 意味着需要创建大量的定时器, 这对cpu负载影响是比较大的. 另外, redis 当前的定时器策略是依赖时间事件来实现的. 时间事件是一个无序链表, 时间复杂度是O(N), 并不能高效的处理大量定时器的场景.    惰性删除  惰性删除对cpu友好, 当对key 有读取操作的时候, 判断当前key 有没有过期, 没过期就返回给用户, 过期了就把key删除. 缺点, 当有很多key 一直没被访问的时候, 这些key就一直存在在内存中, 对内存不友好.    定期删除  定时删除太耗cpu, 惰性删除可能会造成内存泄漏, 所以需要做下折中. 定期删除的策略是每隔一段时间, 执行一次过期删除操作.    RDB 对过期key 的处理  生成RDB文件  执行save或者bgsave命令创建rdb文件的时候, 程序会对过期键进行检查, 过期的key不会保存在rdb 文件中   载入RDB文件  master 载入RDB 文件, 会忽略其中过期的key slave 不会考虑过期的事情, 直接载入rdb文件.
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/second-post/" class="link black dim">
         Second Post
       </a>
@@ -130,7 +147,7 @@
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://yurneroma.github.io/" >
     &copy;  小飞侠的后花园 2022 
   </a>
     <div>

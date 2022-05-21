@@ -2,17 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>小飞侠的后花园</title>
-    <link>http://example.org/</link>
+    <link>http://yurneroma.github.io/</link>
     <description>Recent content on 小飞侠的后花园</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 May 2022 21:44:22 +0800</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 May 2022 18:24:21 +0800</lastBuildDate><atom:link href="http://yurneroma.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis Expire 删除策略</title>
+      <link>http://yurneroma.github.io/posts/redis-expire-%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Sat, 21 May 2022 18:24:21 +0800</pubDate>
+      
+      <guid>http://yurneroma.github.io/posts/redis-expire-%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/</guid>
+      <description>主动删除.  用户设置了key, 和expire 之后. redis 在后台自动设置一个定时器, 在过期时间来临的时候, 定时器生效, 并删除这个key. 好处是可以精准的删除key. 坏处有很多, 对cpu 不友好. 当有大量的key 需要过期时, 意味着需要创建大量的定时器, 这对cpu负载影响是比较大的. 另外, redis 当前的定时器策略是依赖时间事件来实现的. 时间事件是一个无序链表, 时间复杂度是O(N), 并不能高效的处理大量定时器的场景.    惰性删除  惰性删除对cpu友好, 当对key 有读取操作的时候, 判断当前key 有没有过期, 没过期就返回给用户, 过期了就把key删除. 缺点, 当有很多key 一直没被访问的时候, 这些key就一直存在在内存中, 对内存不友好.    定期删除  定时删除太耗cpu, 惰性删除可能会造成内存泄漏, 所以需要做下折中. 定期删除的策略是每隔一段时间, 执行一次过期删除操作.    RDB 对过期key 的处理  生成RDB文件  执行save或者bgsave命令创建rdb文件的时候, 程序会对过期键进行检查, 过期的key不会保存在rdb 文件中   载入RDB文件  master 载入RDB 文件, 会忽略其中过期的key slave 不会考虑过期的事情, 直接载入rdb文件.</description>
+    </item>
+    
     <item>
       <title>Second Post</title>
-      <link>http://example.org/posts/second-post/</link>
+      <link>http://yurneroma.github.io/posts/second-post/</link>
       <pubDate>Sun, 15 May 2022 21:44:22 +0800</pubDate>
       
-      <guid>http://example.org/posts/second-post/</guid>
+      <guid>http://yurneroma.github.io/posts/second-post/</guid>
       <description>redis 分布式锁 方案1 set nx ex 参数 + 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
 方案三 redLock + redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&amp;gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  </description>
@@ -20,10 +29,10 @@
     
     <item>
       <title>First Post</title>
-      <link>http://example.org/posts/first-post/</link>
+      <link>http://yurneroma.github.io/posts/first-post/</link>
       <pubDate>Sun, 15 May 2022 20:50:46 +0800</pubDate>
       
-      <guid>http://example.org/posts/first-post/</guid>
+      <guid>http://yurneroma.github.io/posts/first-post/</guid>
       <description>hello, world</description>
     </item>
     
