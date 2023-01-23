@@ -7,7 +7,7 @@
     <title>小飞侠的后花园</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.98.0" />
+    <meta name="generator" content="Hugo 0.110.0">
     
     
     
@@ -38,7 +38,6 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://yurneroma.github.io/posts/" />
-
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -94,12 +93,29 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/%E6%A6%82%E7%8E%87%E8%AE%BA-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F%E5%8F%8A%E8%92%99%E6%8F%90%E9%9C%8D%E5%B0%94%E6%82%96%E8%AE%BA/" class="link black dim">
+        概率论 贝叶斯公式及蒙提霍尔悖论
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      贝叶斯公式 蒙提霍尔问题 描述 The Monty Hall Problem. This is a much discussed puzzle, based on an old American game show. You are told that a prize is equally likely to be found behind any one of three closed doors in front of you. You point to one of the doors. A friend opens for you one of the remaining two doors, after making sure that the prize is not behind it.
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/redis-expire-%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" class="link black dim">
         Redis Expire 删除策略
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      主动删除.  用户设置了key, 和expire 之后. redis 在后台自动设置一个定时器, 在过期时间来临的时候, 定时器生效, 并删除这个key. 好处是可以精准的删除key. 坏处有很多, 对cpu 不友好. 当有大量的key 需要过期时, 意味着需要创建大量的定时器, 这对cpu负载影响是比较大的. 另外, redis 当前的定时器策略是依赖时间事件来实现的. 时间事件是一个无序链表, 时间复杂度是O(N), 并不能高效的处理大量定时器的场景.    惰性删除  惰性删除对cpu友好, 当对key 有读取操作的时候, 判断当前key 有没有过期, 没过期就返回给用户, 过期了就把key删除. 缺点, 当有很多key 一直没被访问的时候, 这些key就一直存在在内存中, 对内存不友好.    定期删除  定时删除太耗cpu, 惰性删除可能会造成内存泄漏, 所以需要做下折中. 定期删除的策略是每隔一段时间, 执行一次过期删除操作.    RDB 对过期key 的处理  生成RDB文件  执行save或者bgsave命令创建rdb文件的时候, 程序会对过期键进行检查, 过期的key不会保存在rdb 文件中   载入RDB文件  master 载入RDB 文件, 会忽略其中过期的key slave 不会考虑过期的事情, 直接载入rdb文件.
+      主动删除. 用户设置了key, 和expire 之后. redis 在后台自动设置一个定时器, 在过期时间来临的时候, 定时器生效, 并删除这个key. 好处是可以精准的删除key. 坏处有很多, 对cpu 不友好. 当有大量的key 需要过期时, 意味着需要创建大量的定时器, 这对cpu负载影响是比较大的. 另外, redis 当前的定时器策略是依赖时间事件来实现的. 时间事件是一个无序链表, 时间复杂度是O(N), 并不能高效的处理大量定时器的场景. 惰性删除 惰性删除对cpu友好, 当对key 有读取操作的时候, 判断当前key 有没有过期, 没过期就返回给用户, 过期了就把key删除. 缺点, 当有很多key 一直没被访问的时候, 这些key就一直存在在内存中, 对内存不友好. 定期删除 定时删除太耗cpu, 惰性删除可能会造成内存泄漏, 所以需要做下折中. 定期删除的策略是每隔一段时间, 执行一次过期删除操作. RDB 对过期key 的处理 生成RDB文件 执行save或者bgsave命令创建rdb文件的时候, 程序会对过期键进行检查, 过期的key不会保存在rdb 文件中 载入RDB文件 master 载入RDB 文件, 会忽略其中过期的key slave 不会考虑过期的事情, 直接载入rdb文件. AOF 对过期键的处理 aof 写入, 当过期的key 被惰性或者定期删除后, 程序会像aof 文件追加一条DEL操作,显示记录该键被删除. aof 重写, 和rdb类似, 重写的时候, 过期key 会被忽略.
     </div>
   </div>
 </div>
@@ -118,7 +134,7 @@
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       redis 分布式锁 方案1 set nx ex 参数 + 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
-方案三 redLock + redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  
+方案三 redLock + redission 获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁 
     </div>
   </div>
 </div>

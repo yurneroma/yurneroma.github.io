@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
-方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  ">
-    <meta name="generator" content="Hugo 0.98.0" />
+方案三 redLock &#43; redission 获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁 ">
+    <meta name="generator" content="Hugo 0.110.0">
     
     
     
@@ -34,23 +34,22 @@
     <meta property="og:title" content="Second Post" />
 <meta property="og:description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
-方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  " />
+方案三 redLock &#43; redission 获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://yurneroma.github.io/posts/second-post/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-15T21:44:22+08:00" />
 <meta property="article:modified_time" content="2022-05-15T21:44:22+08:00" />
-
 <meta itemprop="name" content="Second Post">
 <meta itemprop="description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
-方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  "><meta itemprop="datePublished" content="2022-05-15T21:44:22+08:00" />
+方案三 redLock &#43; redission 获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁 "><meta itemprop="datePublished" content="2022-05-15T21:44:22+08:00" />
 <meta itemprop="dateModified" content="2022-05-15T21:44:22+08:00" />
 <meta itemprop="wordCount" content="52">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Second Post"/>
 <meta name="twitter:description" content="redis 分布式锁 方案1 set nx ex 参数 &#43; 校验唯一随机数值再释放 存在问题, 锁过期被释放,业务还没执行完的问题 校验唯一随机数然后再删除这个操作不是原子的, 有可能释放了别人的锁(lua脚本?)
 方案2 Redisson 对于拿到锁的线程, 启动一个后台进程, watchdog, 每隔几秒看lock还在不在, 在的话就续期, 解决了 锁过期释放, 业务还没执行完的问题 前面方案都是单机版本, 如果用户线程1获取到锁, master 节点还没来得及向slave 同步, 这个时候master 挂了, 那么slave 会成功master, 然后线程2 也可以抢到锁. 这会存在问题. image.png
-方案三 redLock &#43; redission  获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁  "/>
+方案三 redLock &#43; redission 获取当前时间 按顺序香5个redis master 请求加锁, 并设置超时时间, 超时则跳过 如果&gt;= 3 个节点加锁成功, 并且锁的使用时间小于有效期, 认为加锁成功 否则释放锁 "/>
 
 	
   </head>
