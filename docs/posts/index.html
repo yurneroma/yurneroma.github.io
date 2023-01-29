@@ -7,7 +7,7 @@
     <title>小飞侠的后花园</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.110.0">
+    <meta name="generator" content="Hugo 0.98.0" />
     
     
     
@@ -38,6 +38,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://yurneroma.github.io/posts/" />
+
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -93,6 +94,25 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/bitwise_invert/" class="link black dim">
+        Bitwise_invert
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      Description Write a function invert(x,p,n) that returns x with the n bits that begin at position p inverted (i.e., 1 changed into 0 and vice versa), leaving the others unchanged.
+input unsigned x = 0b00000100; output res = 0b000001010;
+solution code #include &lt;stdio.h&gt; unsigned invert(unsigned x, int p, int n) {  // 1. clear n bits of x to zero  unsigned a = x &amp; ~(~(~0 &lt;&lt; n) &lt;&lt; (p + 1 - n));  unsigned invert_nbits = ~(x &gt;&gt; (p + 1 - n)) &amp; ~(~0 &lt;&lt; n);   return a | invert_nbits &lt;&lt; (p + 1 - n); }  void print(unsigned x) {  for (int i = 8; i &gt;= 0; --i) {  printf(&#34;%d&#34;, (x &gt;&gt; i) &amp; 1);  }  printf(&#34;\n&#34;); }  int main() {  unsigned x = 0b00000100;  unsigned res = invert(x, 3, 3);  print(res); } 
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/setbits/" class="link black dim">
         位运算-用Y的最右n位设置X的从p开始的n位
       </a>
@@ -100,7 +120,7 @@
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       Description Write a function setbits(x,p,n,y) that returns x with the n bits that begin at position p set to the rightmost n bits of y, leaving the other bits unchanged.
 example: x = 00001110; y = 10101011; n = 3 p = 3
-code unsigned setbits(unsigned x, int p, int n, unsigned y) { // before &#34;|&#34; symbol, set n bits of x to zero // after &#34;|&#34; symbol, get rightmost n bits of y, clear the other bits of y, and // move n bits to position P // bitwise 重要性质: // - 0 OR N == N // - 0 AND N == 0 // 1 OR N == N bits 1 // 1 AND N == N return x &amp; ~(~(~0 &lt;&lt; n) &lt;&lt; (p + 1 - n)) | (y &amp; ~(~0 &lt;&lt; n)) &lt;&lt; (p + 1 - n); } void print(unsigned x) { for (int i = 31; i &gt;= 0; --i) { printf(&#34;%d&#34;, (x &gt;&gt; i) &amp; 1); } printf(&#34;\n&#34;); } int main() { unsigned x = 0b00001110; unsigned y = 0b10101011; int n = 3, p = 3; int res = setbits(x, p, n, y); print(res); } Solution 
+code  unsigned setbits(unsigned x, int p, int n, unsigned y) {   // before &#34;|&#34; symbol, set n bits of x to zero  // after &#34;|&#34; symbol, get rightmost n bits of y, clear the other bits of y, and  // move n bits to position P  // bitwise 重要性质:  // - 0 OR N == N  // - 0 AND N == 0  // 1 OR N == N bits 1  // 1 AND N == N  return x &amp; ~(~(~0 &lt;&lt; n) &lt;&lt; (p + 1 - n)) | (y &amp; ~(~0 &lt;&lt; n)) &lt;&lt; (p + 1 - n); }  void print(unsigned x) {  for (int i = 31; i &gt;= 0; --i) {  printf(&#34;%d&#34;, (x &gt;&gt; i) &amp; 1);  }  printf(&#34;\n&#34;); }  int main() {  unsigned x = 0b00001110;  unsigned y = 0b10101011;  int n = 3, p = 3;   int res = setbits(x, p, n, y);  print(res); } Solution 
     </div>
   </div>
 </div>
@@ -117,7 +137,7 @@ code unsigned setbits(unsigned x, int p, int n, unsigned y) { // before &#34;|&#
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      贝叶斯公式 蒙提霍尔问题 描述 The Monty Hall Problem. This is a much discussed puzzle, based on an old American game show. You are told that a prize is equally likely to be found behind any one of three closed doors in front of you. You point to one of the doors. A friend opens for you one of the remaining two doors, after making sure that the prize is not behind it.
+      贝叶斯公式 蒙提霍尔问题 描述  The Monty Hall Problem. This is a much discussed puzzle, based on an old American game show. You are told that a prize is equally likely to be found behind any one of three closed doors in front of you. You point to one of the doors. A friend opens for you one of the remaining two doors, after making sure that the prize is not behind it.
     </div>
   </div>
 </div>
