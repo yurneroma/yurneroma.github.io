@@ -1,7 +1,6 @@
 ---
 title: "位运算-用Y的最右n位设置X的从p开始的n位"
 date: 2023-01-28T18:15:54+08:00
-draft: false
 ---
 
 ## Description
