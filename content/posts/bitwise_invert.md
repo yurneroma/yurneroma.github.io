@@ -3,6 +3,12 @@ title: "Bitwise_invert"
 date: 2023-01-29T23:40:47+08:00
 ---
 
+# jieshao 
+
+aaaaa
+
+
+
 ## Description
 
 Write a function invert(x,p,n) that returns x with the n bits that begin at position p inverted (i.e., 1 changed into 0 and vice versa), leaving the others unchanged.
