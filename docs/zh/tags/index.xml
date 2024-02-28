@@ -12,5 +12,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <atom:link href="https://yurneroma.github.io/zh/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>http</title>
+      <link>https://yurneroma.github.io/zh/tags/http/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://yurneroma.github.io/zh/tags/http/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>rfc</title>
+      <link>https://yurneroma.github.io/zh/tags/rfc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://yurneroma.github.io/zh/tags/rfc/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

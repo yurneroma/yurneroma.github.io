@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>http on 小飞侠的花园</title>
+    <link>https://yurneroma.github.io/zh/tags/http/</link>
+    <description>Recent content in http on 小飞侠的花园</description>
+    <image>
+      <title>小飞侠的花园</title>
+      <url>https://yurneroma.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://yurneroma.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <atom:link href="https://yurneroma.github.io/zh/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP/2 协议笔记</title>
+      <link>https://yurneroma.github.io/zh/posts/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://yurneroma.github.io/zh/posts/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/</guid>
+      <description>Desc Text.</description>
+    </item>
+  </channel>
+</rss>
